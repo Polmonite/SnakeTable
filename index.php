@@ -280,15 +280,18 @@
 				pointsContainer.text(points);
 			};
 			var move = function() {
+				// snake is the snake-storing array
 				var head = snake[0];
-				var x = (snakeDir === 1)
+				// snakeDir is the current snake direction; this variable is update via js
+				// keydown events bound to the window
+				var x = (snakeDir === 1) // right
 					? head.x + 1
-					: (snakeDir === 3)
+					: (snakeDir === 3) // left
 						? head.x - 1
 						: head.x;
-				var y = (snakeDir === 0)
+				var y = (snakeDir === 0) // up
 					? head.y - 1
-					: (snakeDir === 2)
+					: (snakeDir === 2) // down
 						? head.y + 1
 						: head.y;
 				var cellType = getCellType(x, y);
@@ -304,14 +307,14 @@
 				// if head is on bug, we don't remove the tail
 				if (cellType !== 'bug') {
 					var tail = snake.pop();
-					draw(tail.x, tail.y);
+					draw(tail.x, tail.y); // draw without a third parameters draws an empty cell
 				} else {
 					if (speed > maxSpeed) {
 						speed -= 5;
 					}
 					points += 1;
 					updatePoints();
-					getBug();
+					getBug(); // get bug creates a new bug at random coordinates, if needed
 				}
 				draw(snake[0].x, snake[0].y, 'snake');
 			};
